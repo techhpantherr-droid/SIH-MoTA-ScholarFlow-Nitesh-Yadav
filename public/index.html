@@ -1,0 +1,235 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MoTA ScholarFlow â€” AI-assisted Scholarship Management</title><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script><style>
+:root{--navy:#12385b;--blue:#1967a3;--bg:#f4f7fb;--line:#dfe6ee;--green:#15845b;--amber:#a66a00;--red:#b33b44}*{box-sizing:border-box}body{margin:0;font:14px Inter,Segoe UI,Arial;background:var(--bg);color:#162235}.top{height:66px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 24px;justify-content:space-between;position:sticky;top:0;z-index:9}.brand{display:flex;align-items:center;gap:10px;font-weight:800}.logo{background:var(--navy);color:#fff;width:40px;height:40px;border-radius:9px;display:grid;place-items:center}.top small{color:#718096}.layout{display:flex;min-height:calc(100vh - 66px)}aside{width:230px;background:#102d49;color:#dbe8f5;padding:16px 12px}aside h5{color:#8fa8c1;margin:15px 10px 6px;font-size:10px;text-transform:uppercase;letter-spacing:1px}aside button{width:100%;border:0;background:transparent;color:inherit;text-align:left;padding:11px 12px;border-radius:8px;margin:2px 0;cursor:pointer}aside button:hover,aside button.active{background:#1e4d76}main{padding:26px;max-width:1500px;flex:1}.page{display:none}.page.active{display:block}.head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start;margin-bottom:20px}.head h1{margin:0 0 5px;font-size:25px}.muted{color:#68788d}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:17px;box-shadow:0 3px 10px #17395b0a}.metric{font-size:27px;font-weight:800;margin-top:5px}.label{color:#6b7a8d;font-size:12px}.row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:11px 0}.btn{border:0;border-radius:8px;padding:10px 14px;background:var(--navy);color:#fff;font-weight:700;cursor:pointer}.btn.secondary{background:#eaf0f6;color:#24425f}.btn.green{background:var(--green)}.btn.amber{background:#c98b19}.btn.red{background:var(--red)}.grid2{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;margin-top:16px}.badge{padding:5px 9px;border-radius:15px;font-size:11px;font-weight:800;display:inline-block}.pass{background:#e3f5ed;color:#116c4b}.review{background:#fff0d6;color:#895b00}.fail{background:#fde7e8;color:#a22d38}.info{background:#e5eef8;color:#205c8d}.schemegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.scheme h3{margin:5px 0}.source{font-size:11px;color:#55718c;word-break:break-all}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:12px;font-weight:700}.field input,.field select{padding:11px;border:1px solid #d5dee8;border-radius:8px;background:#fff}.full{grid-column:1/-1}.drop{border:2px dashed #b9c9d9;border-radius:12px;padding:28px;text-align:center;background:#f9fbfd}.drop input{margin-top:12px}.preview{max-width:300px;max-height:190px;border-radius:8px;margin:14px auto;display:none}.agent{border-left:4px solid var(--blue);background:#eef6fd;padding:13px;border-radius:8px}.bar{height:8px;background:#e7edf3;border-radius:10px;overflow:hidden}.bar i{display:block;height:100%;background:var(--blue)}table{width:100%;border-collapse:collapse}th,td{padding:11px;border-bottom:1px solid #edf0f4;text-align:left;font-size:12px}th{color:#66768b;background:#f8fafc}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:10px;background:#fff}.timeline{display:flex;margin:20px 0}.step{flex:1;text-align:center;position:relative}.step:after{content:"";position:absolute;top:13px;left:50%;width:100%;height:3px;background:#dfe7ef}.step:last-child:after{display:none}.dot{position:relative;z-index:2;margin:auto;width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:#dfe7ef;color:#fff;font-size:11px;font-weight:800}.done .dot{background:var(--green)}.current .dot{background:var(--blue)}.step small{display:block;margin-top:7px;color:#63738a}.notice{padding:12px;border-radius:8px;background:#fff8e7;border:1px solid #f1dfae}.ok{padding:12px;border-radius:8px;background:#eaf8f2;border:1px solid #bfe6d2}.modal{display:none;position:fixed;inset:0;background:#0b203d88;z-index:20;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modalbox{background:#fff;border-radius:14px;max-width:720px;width:100%;max-height:90vh;overflow:auto;padding:22px;position:relative}.close{position:absolute;right:14px;top:10px;border:0;background:transparent;font-size:25px;cursor:pointer}@media(max-width:900px){aside{width:75px}aside span,aside h5{display:none}.grid,.schemegrid,.grid2,.formgrid{grid-template-columns:1fr}main{padding:15px}}
+</style>
+<style>
+#banner{display:none;margin:0;padding:11px 24px;background:#fff5e0;border-bottom:1px solid #f0d9a8;color:#7a5300;font-size:13px}
+#toast{position:fixed;right:18px;bottom:18px;z-index:50;display:flex;flex-direction:column;gap:8px;max-width:390px}
+#toast div{background:#16293f;color:#fff;padding:11px 15px;border-radius:9px;box-shadow:0 8px 24px #0b1c2e40;font-size:13px}
+#toast div.bad{background:#b33b44}
+#toast div.good{background:#15845b}
+button[disabled]{opacity:.6;cursor:not-allowed}
+.drop input{max-width:100%}
+</style></head><body>
+<header class="top"><div class="brand"><div class="logo">MoTA</div><div>ScholarFlow <small>AI-assisted Scholarship &amp; Fellowship Management</small></div></div><div><span class="badge info" id="envBadge">Prototype â€¢ 2026-27</span></div></header>
+<div id="banner"></div><div id="toast"></div>
+<div class="layout"><aside><h5>Student</h5><button class="active" data-page="dash" onclick="go('dash',this)">â–¦ Dashboard</button><button data-page="schemes" onclick="go('schemes',this)">â—« Schemes</button><button data-page="apply" onclick="go('apply',this)">âœŽ New Application</button><button data-page="docs" onclick="go('docs',this)">â–¤ Documents + AI</button><button data-page="apps" onclick="go('apps',this)">â˜· My Applications</button><h5>Ministry</h5><button data-page="officer" onclick="go('officer',this)">â—ˆ Officer Review</button><button data-page="analytics" onclick="go('analytics',this)">â—Œ Analytics</button><h5>System</h5><button data-page="sources" onclick="go('sources',this)">â†— Official Sources</button></aside>
+<main>
+<section id="dash" class="page active"><div class="head"><div><h1>Student Dashboard</h1><div class="muted">One place to apply, upload documents, verify and track your MoTA scholarship.</div></div><button class="btn" onclick="go('apply')">+ Start Application</button></div><div class="grid"><div class="card"><div class="label">Active applications</div><div class="metric" id="kapps">0</div></div><div class="card"><div class="label">AI document checks</div><div class="metric" id="kdocs">0</div></div><div class="card"><div class="label">Needs correction</div><div class="metric" id="kreview">0</div></div><div class="card"><div class="label">System</div><div class="metric" style="font-size:18px" id="ksys">Checkingâ€¦</div><span class="badge pass" id="ksysbadge">Connecting</span></div></div><div class="grid2"><div class="card"><h3>How the prototype works</h3><div class="timeline"><div class="step done"><div class="dot">1</div><small>Apply</small></div><div class="step done"><div class="dot">2</div><small>Upload</small></div><div class="step current"><div class="dot">3</div><small>AI check</small></div><div class="step"><div class="dot">4</div><small>Officer</small></div><div class="step"><div class="dot">5</div><small>Decision</small></div></div><div class="agent"><b>AI Document Intelligence Agent</b><br><span class="muted">OCR â†’ document-type checks â†’ confidence â†’ deficiency flag â†’ officer review. AI does not make the final government decision.</span></div></div><div class="card"><h3>Official data backbone</h3><p class="muted">Scheme master data is seeded from the official MoTA DBT scheme list and linked to source portals.</p><div class="ok"><b>5 active DBT scholarship/fellowship schemes</b><br><small>Pre-Matric â€¢ Post-Matric â€¢ Top Class â€¢ National Fellowship â€¢ National Overseas</small></div></div></div></section>
+<section id="schemes" class="page"><div class="head"><div><h1>Official MoTA Schemes</h1><div class="muted">Loaded from the official DBT scheme list; each record keeps its source link.</div></div></div><div id="schemegrid" class="schemegrid"></div></section>
+<section id="apply" class="page"><div class="head"><div><h1>New Scholarship Application</h1><div class="muted">Create a real database record, then upload documents for OCR + AI pre-screening.</div></div></div><div class="card"><div class="formgrid"><div class="field"><label>Scheme</label><select id="scheme"></select></div><div class="field"><label>Full name</label><input id="name" placeholder="Applicant name"></div><div class="field"><label>Email</label><input id="email" placeholder="name@example.com"></div><div class="field"><label>State / UT</label><input id="state" placeholder="State"></div><div class="field"><label>District</label><input id="district" placeholder="District"></div><div class="field"><label>Mobile</label><input id="mobile" placeholder="10-digit mobile"></div><div class="field"><label>Category</label><select id="category"><option>ST</option></select></div><div class="field"><label>Annual family income (â‚¹)</label><input id="income" type="number" placeholder="250000"></div><div class="field"><label>Qualification</label><input id="qualification" placeholder="B.Tech / Class X / PhD etc."></div><div class="field"><label>Institution</label><input id="institution" placeholder="Institute / University"></div><div class="full"><button class="btn" onclick="createApplication()">Create Application</button></div></div><div id="created" style="margin-top:16px"></div></div></section>
+<section id="docs" class="page"><div class="head"><div><h1>Document Centre + AI Verification</h1><div class="muted">Upload an actual image, OCR it in the browser, and send the extracted text to the backend AI verification agent.</div></div></div><div class="card"><div class="field"><label>Application ID or MOTA number</label><input id="docApp" placeholder="e.g. 1 or MOTA-2026-A1B2C3D"></div><br><div class="field"><label>Document type</label><select id="docType"><option>ST Certificate</option><option>Income Certificate</option><option>Marksheet</option><option>Admission / Offer Letter</option><option>Domicile Certificate</option><option>Other</option></select></div><br><div class="drop"><b>Upload document image</b><br><span class="muted">JPG / PNG works best for live OCR</span><br><input id="file" type="file" accept="image/*,.pdf" onchange="previewFile(this)"><img id="preview" class="preview"></div><div id="ocrbox" style="display:none;margin-top:15px"><div class="agent"><b>OCR text extracted</b><pre id="ocrtext" style="white-space:pre-wrap;max-height:180px;overflow:auto">Ready. Choose a file to start OCR.</pre></div><br><button class="btn" id="runBtn" onclick="runAgent()">Run AI Verification Agent</button></div><div id="result" style="margin-top:15px"></div></div></section>
+<section id="apps" class="page"><div class="head"><div><h1>Applications</h1><div class="muted">Live records from SQLite.</div></div><button class="btn secondary" onclick="loadApplications()">Refresh</button></div><div class="tablewrap"><table><thead><tr><th>Application</th><th>Scheme</th><th>Applicant</th><th>Status</th><th>Stage</th><th>AI score</th><th>Action</th></tr></thead><tbody id="apbody"></tbody></table></div></section>
+<section id="officer" class="page"><div class="head"><div><h1>Officer Review Console</h1><div class="muted">Authorised officer makes the final decision after AI-assisted findings.</div></div></div><div class="tablewrap"><table><thead><tr><th>Application</th><th>Applicant</th><th>Status</th><th>AI</th><th>Action</th></tr></thead><tbody id="offbody"></tbody></table></div></section>
+<section id="analytics" class="page"><div class="head"><div><h1>Live Analytics</h1><div class="muted">Counts generated from the local database, not hard-coded demo numbers.</div></div></div><div class="grid"><div class="card"><div class="label">Total applications</div><div class="metric" id="atotal">0</div></div><div class="card"><div class="label">Submitted</div><div class="metric" id="asub">0</div></div><div class="card"><div class="label">Eligible</div><div class="metric" id="aelig">0</div></div><div class="card"><div class="label">Deficiency / review</div><div class="metric" id="adef">0</div></div></div><div class="card" style="margin-top:16px"><h3>Document AI outcomes</h3><div id="docstats"></div></div></section>
+<section id="sources" class="page"><div class="head"><div><h1>Official Source Links</h1><div class="muted">Use these during the SIH demo to show that the scheme master data is grounded in government sources.</div></div></div><div class="card"><p><b>Ministry of Tribal Affairs â€” Scholarship</b><br><a href="https://tribal.nic.in/Scholarship.aspx" target="_blank">https://tribal.nic.in/Scholarship.aspx</a></p><p><b>MoTA DBT â€” All Schemes</b><br><a href="https://dbttribal.gov.in/AllScheme.aspx" target="_blank">https://dbttribal.gov.in/AllScheme.aspx</a></p><p><b>DBT Bharat / MoTA DBT</b><br><a href="https://dbttribal.gov.in/" target="_blank">https://dbttribal.gov.in/</a></p><div class="notice"><b>Integration note:</b> Production Aadhaar/NSP/PFMS/DBT APIs are not called by this student prototype because authorised credentials are required. The backend is structured so those adapters can be added without changing the UI workflow.</div></div></section>
+</main></div><div id="modal" class="modal"><div class="modalbox"><button class="close" onclick="closeModal()">Ã—</button><div id="modalbody"></div></div></div>
+<script>
+let schemes=[],apps=[],currentApp=null,ocr='',ocrReady=null,health=null;
+const $=id=>document.getElementById(id);
+const esc=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num=v=>Number(v||0);
+const fileHref=p=>'/api/files/'+encodeURIComponent(p);
+
+function toast(msg,kind){const box=$('toast');const el=document.createElement('div');el.className=kind||'';el.textContent=msg;box.appendChild(el);setTimeout(()=>el.remove(),kind==='bad'?7000:4000);}
+
+async function api(url,opts){
+  let res;
+  try{res=await fetch(url,opts);}
+  catch(e){throw new Error('Network error: '+e.message);}
+  const text=await res.text();
+  let data=null;
+  try{data=text?JSON.parse(text):null;}catch(e){data=null;}
+  if(!res.ok||(data&&data.ok===false)){
+    const msg=(data&&(data.error||data.message))||(res.status===413?'File is too large for this deployment.':'Request failed (HTTP '+res.status+')');
+    throw new Error(msg);
+  }
+  return data;
+}
+
+function setBusy(btn,busy,label){if(!btn)return;if(busy){btn.dataset.label=btn.textContent;btn.disabled=true;if(label)btn.textContent=label;}else{btn.disabled=false;if(btn.dataset.label)btn.textContent=btn.dataset.label;}}
+
+function go(id,el){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  const page=$(id); if(page)page.classList.add('active');
+  document.querySelectorAll('aside button').forEach(x=>x.classList.remove('active'));
+  const nav=el||document.querySelector('aside button[data-page="'+id+'"]');
+  if(nav)nav.classList.add('active');
+  if(id==='apps'||id==='officer')loadApplications();
+  if(id==='analytics')loadAnalytics();
+  if(id==='sources')loadHealth();
+}
+
+async function loadHealth(){
+  try{
+    health=await api('/api/health');
+    $('ksys').textContent=health.database;
+    $('ksysbadge').textContent=health.durable?'Durable storage':'Ephemeral storage';
+    $('ksysbadge').className='badge '+(health.durable?'pass':'review');
+    $('envBadge').textContent='Prototype â€¢ '+(health.durable?'2026-27 â€¢ live DB':'2026-27 â€¢ /tmp DB');
+    $('banner').style.display=health.warning?'block':'none';
+    $('banner').textContent=health.error?('Backend error: '+health.error):(health.warning||'');
+    if(!health.ok)toast(health.error||'Backend error','bad');
+  }catch(e){
+    $('ksys').textContent='Offline';
+    $('ksysbadge').textContent='API unreachable';
+    $('ksysbadge').className='badge fail';
+    $('banner').style.display='block';
+    $('banner').textContent='Cannot reach the backend API: '+e.message;
+  }
+}
+
+async function loadSchemes(){
+  try{
+    schemes=await api('/api/schemes');
+    $('schemegrid').innerHTML=schemes.map(s=>`<div class="card scheme"><span class="badge info">${esc(s.code)}</span><h3>${esc(s.name)}</h3><p class="muted">${esc(s.type)}</p><p>${esc(s.notes)}</p><div class="source">Apply: <a target="_blank" rel="noopener" href="${esc(s.portal)}">${esc(s.portal)}</a><br>Official source: <a target="_blank" rel="noopener" href="${esc(s.source)}">${esc(s.source)}</a></div></div>`).join('');
+    $('scheme').innerHTML=schemes.map(s=>`<option value="${esc(s.code)}">${esc(s.name)}</option>`).join('');
+  }catch(e){toast('Could not load schemes: '+e.message,'bad');}
+}
+
+async function createApplication(){
+  const d={scheme_code:$('scheme').value,name:$('name').value.trim(),email:$('email').value.trim(),state:$('state').value.trim(),district:$('district').value.trim(),mobile:$('mobile').value.trim(),category:$('category').value,income:$('income').value,qualification:$('qualification').value.trim(),institution:$('institution').value.trim()};
+  if(!d.name||!d.email||!d.state){toast('Enter name, email and state','bad');return;}
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)){toast('Enter a valid email address','bad');return;}
+  const btn=document.querySelector('#apply .btn');
+  setBusy(btn,true,'Creatingâ€¦');
+  try{
+    const r=await api('/api/applications',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
+    currentApp=r;
+    $('docApp').value=r.app_no;
+    const e=r.eligibility_precheck||{result:'ELIGIBLE',reasons:[],warnings:[]};
+    $('created').innerHTML=`<div class="ok"><b>Application created: ${esc(r.app_no)}</b><br>Database ID: ${esc(r.id)}<br>Rule pre-check: <b>${esc(e.result)}</b>${(e.reasons&&e.reasons.length)?'<br>Attention: '+e.reasons.map(esc).join('<br>Attention: '):''}${esc((e.warnings&&e.warnings.length)?'<br>Note: '+e.warnings.join('<br>Note: '):'')}<br><br><button class="btn" onclick="go('docs')">Continue to Document Verification</button></div>`;
+    ['name','email','state','district','mobile','income','qualification','institution'].forEach(k=>{$(k).value='';});
+    toast('Application '+r.app_no+' created','good');
+    loadApplications();loadAnalytics();
+  }catch(e){toast(e.message,'bad');}
+  finally{setBusy(btn,false);}
+}
+
+function previewFile(input){
+  const f=input.files[0];
+  $('result').innerHTML='';
+  if(!f){$('ocrbox').style.display='none';ocrReady=null;return;}
+  const p=$('preview');
+  if(f.type.startsWith('image/')){p.src=URL.createObjectURL(f);p.style.display='block';}else{p.style.display='none';}
+  $('ocrbox').style.display='block';
+  $('runBtn').disabled=true;
+  ocr='';
+  if(health&&f.size>health.max_upload_mb*1024*1024){
+    $('ocrtext').textContent='This file is larger than the '+health.max_upload_mb+' MB limit of this deployment.';
+    toast('File exceeds the '+health.max_upload_mb+' MB upload limit','bad');
+    ocrReady=Promise.resolve('');
+    $('runBtn').disabled=false;
+    return;
+  }
+  if(f.type.startsWith('image/')&&typeof Tesseract!=='undefined'){
+    $('ocrtext').textContent='Running OCR in the browserâ€¦';
+    ocrReady=Tesseract.recognize(f,'eng')
+      .then(({data})=>{ocr=(data&&data.text)||'';$('ocrtext').textContent=ocr.trim()||'No readable text detected. Officer review recommended.';return ocr;})
+      .catch(e=>{ocr='';$('ocrtext').textContent='OCR unavailable ('+e.message+'). The file will still be stored and flagged for officer review.';return '';});
+  }else if(f.type.startsWith('image/')){
+    $('ocrtext').textContent='OCR library did not load. The file will still be stored and flagged for officer review.';
+    ocrReady=Promise.resolve('');
+  }else{
+    $('ocrtext').textContent='PDF selected. Live OCR runs on images; for a PDF the server stores the file and the AI agent returns a review recommendation.';
+    ocrReady=Promise.resolve('');
+  }
+  ocrReady.then(()=>{$('runBtn').disabled=false;});
+}
+
+async function runAgent(){
+  const aid=$('docApp').value.trim();
+  const f=$('file').files[0];
+  if(!aid){toast('Enter an application ID or MOTA application number','bad');return;}
+  if(!f){toast('Choose a document to upload','bad');return;}
+  setBusy($('runBtn'),true,'Uploadingâ€¦');
+  try{
+    await ocrReady;
+    const fd=new FormData();
+    fd.append('app_id',aid);
+    fd.append('doc_type',$('docType').value);
+    fd.append('file',f,f.name);
+    fd.append('ocr_text',ocr);
+    const r=await api('/api/upload',{method:'POST',body:fd});
+    const x=r.result||{};
+    const cls=x.status==='PASS'?'pass':x.status==='FAIL'?'fail':'review';
+    $('result').innerHTML=`<div class="card"><div class="row"><b>${esc(x.agent)}</b><span class="badge ${cls}">${esc(x.status)} â€¢ ${esc(x.score)}%</span></div><ul>${(x.findings&&x.findings.length)?x.findings.map(v=>'<li>'+esc(v)+'</li>').join(''):'<li>No strong finding; manual review recommended.</li>'}</ul><small class="muted">${esc(x.disclaimer)}</small></div>`;
+    toast('Document uploaded â€” AI result '+(x.status||'?'),'good');
+    loadApplications();loadAnalytics();
+  }catch(e){$('result').innerHTML='<div class="notice">'+esc(e.message)+'</div>';toast(e.message,'bad');}
+  finally{setBusy($('runBtn'),false);}
+}
+
+const badge=status=>status==='Eligible'?'pass':(status==='Deficiency'||status==='Rejected')?'review':'info';
+
+async function loadApplications(){
+  try{
+    apps=await api('/api/applications');
+    if(!Array.isArray(apps))throw new Error('Unexpected response');
+    $('apbody').innerHTML=apps.map(a=>`<tr><td><b>${esc(a.app_no)}</b></td><td>${esc(a.scheme_code)}</td><td>${esc(a.name)}</td><td><span class="badge ${badge(a.status)}">${esc(a.status)}</span></td><td>${esc(a.stage)}</td><td>${esc(num(a.ai_score))}%</td><td><button class="btn secondary" onclick="details(${a.id})">View</button></td></tr>`).join('')||'<tr><td colspan="7">No applications yet.</td></tr>';
+    $('offbody').innerHTML=apps.map(a=>`<tr><td>${esc(a.app_no)}</td><td>${esc(a.name)}</td><td><span class="badge ${badge(a.status)}">${esc(a.status)}</span></td><td>${esc(num(a.ai_score))}%</td><td><button class="btn secondary" onclick="review(${a.id})">Review</button></td></tr>`).join('')||'<tr><td colspan="5">Nothing to review yet.</td></tr>';
+    $('kapps').textContent=apps.length;
+  }catch(e){toast('Could not load applications: '+e.message,'bad');}
+}
+
+function docRows(docs){
+  return docs.map(x=>`<div class="row"><span>${esc(x.doc_type)} â€” <a target="_blank" rel="noopener" href="${fileHref(x.stored_path)}">${esc(x.filename)}</a></span><span class="badge ${x.ai_status==='PASS'?'pass':x.ai_status==='FAIL'?'fail':'review'}">${esc(x.ai_status)} ${esc(x.ai_score)}%</span></div>`).join('')||'<p class="muted">No documents uploaded.</p>';
+}
+
+function timeline(a,docs){
+  const hasDocs=docs.length>0, decided=a.status!=='Submitted';
+  return `<div class="timeline"><div class="step done"><div class="dot">âœ“</div><small>Submitted</small></div><div class="step ${hasDocs?'done':'current'}"><div class="dot">${hasDocs?'âœ“':'2'}</div><small>Documents</small></div><div class="step ${decided?'done':'current'}"><div class="dot">3</div><small>Officer</small></div><div class="step ${a.status==='Eligible'?'done':''}"><div class="dot">4</div><small>Decision</small></div></div>`;
+}
+
+async function details(id){
+  try{
+    const d=await api('/api/applications/'+id);
+    const a=d.application;
+    $('modalbody').innerHTML=`<h2>${esc(a.app_no)}</h2><p><b>${esc(a.name)}</b> â€¢ ${esc(a.scheme_code)} â€¢ ${esc(a.state)}${a.district?', '+esc(a.district):''}<br><span class="badge ${badge(a.status)}">${esc(a.status)}</span> <span class="muted">${esc(a.stage)}</span></p>${timeline(a,d.documents)}<h3>Documents</h3>${docRows(d.documents)}<h3>Audit events</h3>${d.events.map(x=>`<p><b>${esc(x.event)}</b> â€” ${esc(x.actor)}<br><small>${esc(x.created_at)} ${esc(x.details?'â€¢ '+x.details:'')}</small></p>`).join('')||'<p class="muted">No events.</p>'}<h3>Notifications</h3>${(d.notifications||[]).map(n=>`<p><b>${esc(n.title)}</b><br><small>${esc(n.message)}</small></p>`).join('')||'<p class="muted">No notifications.</p>'}<br><button class="btn secondary" onclick="review(${a.id})">Open officer review</button>`;
+    $('modal').classList.add('show');
+  }catch(e){toast(e.message,'bad');}
+}
+
+async function review(id){
+  try{
+    const d=await api('/api/applications/'+id);
+    const a=d.application;
+    $('modalbody').innerHTML=`<h2>Officer Review â€” ${esc(a.app_no)}</h2><div class="agent"><b>AI recommendation</b><br>Average document confidence: ${esc(num(a.ai_score))}%. AI pre-screen result: ${esc(a.ai_result)}. Open the original documents before deciding.</div><h3>Applicant</h3><p>${esc(a.name)} â€¢ ${esc(a.scheme_code)} â€¢ ${esc(a.category)} â€¢ Income â‚¹${esc(num(a.income))}<br><small>${esc(a.email)} â€¢ ${esc(a.mobile||'no mobile')} â€¢ ${esc(a.qualification||'qualification pending')} â€¢ ${esc(a.institution||'institution pending')}</small></p><h3>Documents</h3>${docRows(d.documents)}<br><button class="btn green" id="dApprove" onclick="decide(${a.id},'approve')">Approve / Eligible</button> <button class="btn amber" id="dCorrect" onclick="decide(${a.id},'correction')">Request Correction</button> <button class="btn red" id="dReject" onclick="decide(${a.id},'reject')">Reject</button>`;
+    $('modal').classList.add('show');
+  }catch(e){toast(e.message,'bad');}
+}
+
+async function decide(id,action){
+  const note=prompt('Officer note (optional):')||'';
+  const btn=$((action==='approve'?'dApprove':action==='correction'?'dCorrect':'dReject'));
+  setBusy(btn,true,'Savingâ€¦');
+  try{
+    const r=await api('/api/applications/'+id+'/review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,note})});
+    closeModal();
+    toast('Decision recorded: '+r.status,'good');
+    await loadApplications();
+    loadAnalytics();
+  }catch(e){toast(e.message,'bad');}
+  finally{setBusy(btn,false);}
+}
+
+async function loadAnalytics(){
+  try{
+    const x=await api('/api/analytics');
+    const s=Object.fromEntries(x.statuses.map(v=>[v.status,v.n]));
+    $('atotal').textContent=x.total;
+    $('asub').textContent=s.Submitted||0;
+    $('aelig').textContent=s.Eligible||0;
+    $('adef').textContent=(s.Deficiency||0)+(s.Rejected||0);
+    $('kreview').textContent=s.Deficiency||0;
+    $('docstats').innerHTML=x.documents.map(d=>`<div class="row"><span>${esc(d.ai_status)}</span><b>${esc(d.n)}</b></div><div class="bar"><i style="width:${Math.min(100,d.n*20)}%"></i></div>`).join('')||'No documents yet.';
+    const ai=await api('/api/applications');
+    $('kdocs').textContent=ai.reduce((n,a)=>n+(num(a.ai_score)>0?1:0),0);
+  }catch(e){toast('Could not load analytics: '+e.message,'bad');}
+}
+
+function closeModal(){$('modal').classList.remove('show')}
+$('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+loadHealth();loadSchemes();loadApplications();loadAnalytics();
+</script></body></html>
