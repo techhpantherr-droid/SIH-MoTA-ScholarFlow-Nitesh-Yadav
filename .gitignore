@@ -9,3 +9,4 @@ mota.db
 mota.db-shm
 mota.db-wal
 uploads/
+.vercel

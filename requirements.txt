@@ -1,2 +1,5 @@
 Flask>=3.0
 Werkzeug>=3.0
+# Optional: remote durable database for serverless deployments.
+# Only imported when MOTA_DATABASE_URL / TURSO_DATABASE_URL is configured.
+libsql-client>=0.3.0

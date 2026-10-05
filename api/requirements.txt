@@ -1,3 +1,7 @@
+# Deployment requirements for the Vercel function in this directory.
+# Keep in sync with the root requirements.txt.
+Flask>=3.0
+Werkzeug>=3.0
 # Only imported when MOTA_DATABASE_URL / TURSO_DATABASE_URL is configured.
 # The app degrades to an embedded SQLite database when this is unavailable.
 libsql-client>=0.3.0
